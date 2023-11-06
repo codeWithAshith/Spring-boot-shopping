@@ -14,24 +14,21 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PurchaseHistory {
+@Table(name = "cart")
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "product_purchased",
-            joinColumns = @JoinColumn(name = "purchase_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id",
-                    referencedColumnName = "id"))
-    private List<Book> books = new ArrayList<>();
-
     @ManyToOne
     private AppUser appUser;
 
+    @ManyToOne
+    private Book book;
+
     @CreationTimestamp
-    private LocalDateTime purchaseTime;
+    private LocalDateTime createdAt;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean deleteFlag;

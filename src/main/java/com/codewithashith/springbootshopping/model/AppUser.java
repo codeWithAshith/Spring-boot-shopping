@@ -7,13 +7,15 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "users") // don't use User
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +30,20 @@ public class User {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<PurchaseHistory> purchaseHistoryList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "appUser")
+    private List<Cart> carts = new ArrayList<>();
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean deleteFlag;
+
 }

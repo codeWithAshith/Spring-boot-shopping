@@ -7,13 +7,15 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "books")
-public class Product {
+@Table(name = "category")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +24,12 @@ public class Product {
     @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(nullable = false, length = 200)
-    private String description;
-
-    @Column(nullable = false, length = 200)
-    private String author;
-
-    @Column(nullable = false, length = 200)
-    private Double price;
+    @OneToMany(mappedBy = "category")
+    private List<Book> bookList = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean deleteFlag;
 }
