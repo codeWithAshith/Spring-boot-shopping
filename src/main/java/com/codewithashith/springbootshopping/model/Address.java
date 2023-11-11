@@ -1,44 +1,38 @@
 package com.codewithashith.springbootshopping.model;
 
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product")
-public class Book {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 200)
-    private String title;
+    private String address;
 
     @Column(nullable = false, length = 200)
-    private String description;
+    private String city;
 
     @Column(nullable = false, length = 200)
-    private String author;
-
-    @Column(nullable = false, length = 200)
-    private Double price;
+    private Integer zipcode;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private AppUser appUser;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Cart> carts = new ArrayList<>();
+    @OneToOne(mappedBy = "address")
+    private Order order;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

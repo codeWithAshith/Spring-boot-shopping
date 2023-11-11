@@ -1,6 +1,7 @@
 package com.codewithashith.springbootshopping.model;
 
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product")
-public class Book {
+@Table(name = "orders") // don't user order
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,15 +34,22 @@ public class Book {
     @Column(nullable = false, length = 200)
     private Double price;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+    private Integer count = 1;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Cart> carts = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private AppUser appUser;
+
+    @OneToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private OrderStatus orderStatus;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime orderTime;
 
     private Boolean deleteFlag = false;
 }

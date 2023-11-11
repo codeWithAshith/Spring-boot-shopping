@@ -1,7 +1,6 @@
 package com.codewithashith.springbootshopping.repository;
 
 import com.codewithashith.springbootshopping.model.Cart;
-import com.codewithashith.springbootshopping.model.PurchaseHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

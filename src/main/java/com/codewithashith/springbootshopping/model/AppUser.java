@@ -48,11 +48,14 @@ public class AppUser {
 
     @JsonIgnore
     @OneToMany(mappedBy = "appUser")
-    private List<PurchaseHistory> purchaseHistoryList = new ArrayList<>();
+    private List<Order> orderList = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "appUser")
     private List<Cart> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "appUser")
+    private List<Address> addressList;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
