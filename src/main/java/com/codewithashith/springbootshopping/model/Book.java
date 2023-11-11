@@ -1,6 +1,6 @@
 package com.codewithashith.springbootshopping.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,12 +40,11 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     private List<PurchaseHistory> purchaseHistoryList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book")
+    @ManyToMany(mappedBy = "books")
     private List<Cart> carts = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleteFlag;
+    private Boolean deleteFlag = false;
 }

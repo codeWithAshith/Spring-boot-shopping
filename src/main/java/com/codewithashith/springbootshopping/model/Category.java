@@ -1,6 +1,6 @@
 package com.codewithashith.springbootshopping.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +30,5 @@ public class Category {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleteFlag;
+    private Boolean deleteFlag = false;
 }

@@ -1,6 +1,6 @@
 package com.codewithashith.springbootshopping.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,12 +24,16 @@ public class Cart {
     @ManyToOne
     private AppUser appUser;
 
-    @ManyToOne
-    private Book book;
+    @ManyToMany
+    @JoinTable(
+            name = "users_cart",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleteFlag;
+    private Boolean deleteFlag = false;
 }

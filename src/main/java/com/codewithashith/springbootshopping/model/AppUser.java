@@ -1,11 +1,15 @@
 package com.codewithashith.springbootshopping.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Table(name = "users") // don't use User
 public class AppUser {
 
@@ -22,28 +27,36 @@ public class AppUser {
     private Long id;
 
     @Column(name = "username", unique = true, nullable = false, length = 100)
+    @NotEmpty
+    @Size(min = 2, message = "Username should have at least 2 characters")
     private String username;
 
     @Column(nullable = false, length = 100)
+    @NotEmpty
+    @Size(min = 2, message = "Password should have at least 2 characters")
     private String password;
 
     @Column(nullable = false, length = 100)
+    @NotEmpty
+    @Size(min = 2, message = "Name should have at least 2 characters")
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role roles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "appUser")
     private List<PurchaseHistory> purchaseHistoryList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "appUser")
     private List<Cart> carts = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(columnDefinition = "boolean default false")
-    private Boolean deleteFlag;
+    private Boolean deleteFlag = false;
 
 }
