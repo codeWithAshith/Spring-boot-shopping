@@ -25,7 +25,7 @@ public class OrderStatus {
     private Order order;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    private Boolean deleteFlag = false;
 }

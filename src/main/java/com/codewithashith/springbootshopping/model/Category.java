@@ -28,6 +28,7 @@ public class Category {
     private List<Book> bookList = new ArrayList<>();
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     private Boolean deleteFlag = false;

@@ -49,7 +49,6 @@ public class Order {
     private Address address;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime orderTime;
-
-    private Boolean deleteFlag = false;
 }

@@ -1,6 +1,7 @@
 package com.codewithashith.springbootshopping.repository;
 
-import com.codewithashith.springbootshopping.model.Cart;
+import com.codewithashith.springbootshopping.model.Address;
+import com.codewithashith.springbootshopping.model.Book;
 import com.codewithashith.springbootshopping.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Long> {
-
+public interface AddressRepository extends JpaRepository<Address, Long> {
 
 }

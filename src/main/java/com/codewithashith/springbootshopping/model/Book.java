@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product")
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -46,7 +46,6 @@ public class Book {
     private List<Cart> carts = new ArrayList<>();
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
-
-    private Boolean deleteFlag = false;
 }

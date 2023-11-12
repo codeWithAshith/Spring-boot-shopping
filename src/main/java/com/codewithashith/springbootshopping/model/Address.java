@@ -1,8 +1,10 @@
 package com.codewithashith.springbootshopping.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -27,15 +29,17 @@ public class Address {
     @Column(nullable = false, length = 200)
     private Integer zipcode;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private AppUser appUser;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address")
     private Order order;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    private Boolean deleteFlag = false;
 }

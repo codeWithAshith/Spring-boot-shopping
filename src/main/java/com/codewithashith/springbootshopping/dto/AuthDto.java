@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthDto {
-
     public AppUser mapToAppUser(RegisterRequest registerRequest) {
         AppUser appUser = new AppUser();
         appUser.setUsername(registerRequest.getUsername());

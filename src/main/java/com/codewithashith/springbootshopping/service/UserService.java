@@ -1,6 +1,8 @@
 package com.codewithashith.springbootshopping.service;
 
 import com.codewithashith.springbootshopping.dto.AuthDto;
+import com.codewithashith.springbootshopping.exception.common.ResourceNotFoundException;
+import com.codewithashith.springbootshopping.response.UserResponse;
 import com.codewithashith.springbootshopping.exception.common.InvalidUserException;
 import com.codewithashith.springbootshopping.model.AppUser;
 import com.codewithashith.springbootshopping.model.Role;
@@ -12,6 +14,8 @@ import com.codewithashith.springbootshopping.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -45,4 +49,12 @@ public class UserService {
         return authDto.mapToAuthResponse(appUser);
     }
 
+    public List<AppUser> findAll() {
+        return userRepository.findAll();
+    }
+
+    public AppUser findUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("user", "id", id));
+    }
 }

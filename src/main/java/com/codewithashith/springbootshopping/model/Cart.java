@@ -33,7 +33,7 @@ public class Cart {
     private List<Book> books = new ArrayList<>();
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    private Boolean deleteFlag = false;
 }

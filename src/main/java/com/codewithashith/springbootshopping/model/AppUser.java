@@ -18,7 +18,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Table(name = "users") // don't use User
 public class AppUser {
 
@@ -58,8 +57,7 @@ public class AppUser {
     private List<Address> addressList;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
-
-    private Boolean deleteFlag = false;
 
 }
