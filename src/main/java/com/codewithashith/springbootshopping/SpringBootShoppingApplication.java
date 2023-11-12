@@ -2,9 +2,11 @@ package com.codewithashith.springbootshopping;
 
 import com.codewithashith.springbootshopping.repository.UserRepository;
 import com.codewithashith.springbootshopping.request.AddressRequest;
+import com.codewithashith.springbootshopping.request.BookRequest;
 import com.codewithashith.springbootshopping.request.CategoryRequest;
 import com.codewithashith.springbootshopping.request.RegisterRequest;
 import com.codewithashith.springbootshopping.service.AddressService;
+import com.codewithashith.springbootshopping.service.BookService;
 import com.codewithashith.springbootshopping.service.CategoryService;
 import com.codewithashith.springbootshopping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,9 @@ public class SpringBootShoppingApplication implements CommandLineRunner {
     CategoryService categoryService;
     @Autowired
     AddressService addressService;
+
     @Autowired
-    UserService userService;
+    BookService bookService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootShoppingApplication.class, args);
@@ -63,6 +66,34 @@ public class SpringBootShoppingApplication implements CommandLineRunner {
 
         System.out.println(addressService.update(addressRequestUpdate));
         System.out.println(addressService.deleteById(2L));
+
+        BookRequest bookRequest = new BookRequest();
+        bookRequest.setTitle("My book");
+        bookRequest.setAuthor("Ashith");
+        bookRequest.setDescription("Ashith");
+        bookRequest.setCategoryId(1L);
+        bookRequest.setPrice(100D);
+
+        BookRequest bookRequestUpdate = new BookRequest();
+        bookRequestUpdate.setId(1L);
+        bookRequestUpdate.setTitle("Updated Book title");
+        bookRequestUpdate.setAuthor("Ashith");
+        bookRequestUpdate.setDescription("Ashith");
+        bookRequestUpdate.setCategoryId(1L);
+        bookRequestUpdate.setPrice(100D);
+
+        BookRequest bookRequestDelete = new BookRequest();
+        bookRequestDelete.setTitle("New Book");
+        bookRequestDelete.setAuthor("Ashith");
+        bookRequestDelete.setDescription("Ashith");
+        bookRequestDelete.setCategoryId(1L);
+        bookRequestDelete.setPrice(200D);
+
+        System.out.println(bookService.createBook(bookRequest));
+        System.out.println(bookService.createBook(bookRequestDelete));
+
+        System.out.println(bookService.updateBook(bookRequestUpdate));
+        System.out.println(bookService.deleteById(2));
 
     }
 }

@@ -33,7 +33,7 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/address")
     public ResponseEntity<APIResponse> createAddress(@RequestBody
                                                      AddressRequest addressRequest) {
         AddressResponse addressResponse = addressService.create(addressRequest);
@@ -42,7 +42,7 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping("/address")
     public ResponseEntity<APIResponse> updateAddress(@RequestBody
                                                          AddressRequest addressRequest) {
         AddressResponse addressResponse = addressService.update(addressRequest);
@@ -51,7 +51,7 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/address/{id}")
     public ResponseEntity<APIResponse> deleteAddress(@PathVariable Integer id) {
         AddressResponse addressResponse = addressService
                 .deleteById(Long.valueOf(id));

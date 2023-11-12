@@ -1,6 +1,8 @@
 package com.codewithashith.springbootshopping.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,11 +39,12 @@ public class Book {
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "books")
     private List<Cart> carts = new ArrayList<>();
 
