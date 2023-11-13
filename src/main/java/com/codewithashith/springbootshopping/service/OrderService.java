@@ -77,4 +77,22 @@ public class OrderService {
         List<Order> orderList = orderRepository.findAll();
         return orderDto.mapToOrderResponse(orderList);
     }
+
+    public List<OrderStatus> getAllOrderStatus() {
+        return orderStatusRepository.findAll();
+    }
+
+    public List<OrderResponse> updateOrderStatus(Long orderId, Long statusId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("orderId", "orderId", orderId));
+
+        OrderStatus orderStatus = orderStatusRepository.findById(statusId)
+                .orElseThrow(() -> new ResourceNotFoundException("statusId", "statusId", statusId));
+
+        order.setOrderStatus(orderStatus);
+
+        orderRepository.save(order);
+
+        return getAllOrders();
+    }
 }

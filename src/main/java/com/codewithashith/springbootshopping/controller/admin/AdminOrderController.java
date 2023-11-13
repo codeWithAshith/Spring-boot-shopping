@@ -1,6 +1,8 @@
 package com.codewithashith.springbootshopping.controller.admin;
 
+import com.codewithashith.springbootshopping.model.OrderStatus;
 import com.codewithashith.springbootshopping.model.Role;
+import com.codewithashith.springbootshopping.request.OrderStatusRequest;
 import com.codewithashith.springbootshopping.response.OrderResponse;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
 import com.codewithashith.springbootshopping.service.OrderService;
@@ -41,9 +43,22 @@ public class AdminOrderController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<APIResponse> updateOrderStatus() {
+    @GetMapping("/status/all")
+    public ResponseEntity<APIResponse> getAllStatus() {
+        List<OrderStatus> orderList = orderService.getAllOrderStatus();
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(orderList);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 
+    @PutMapping("/status")
+    public ResponseEntity<APIResponse> updateOrderStatus(
+            @RequestBody OrderStatusRequest orderStatusRequest) {
+        List<OrderResponse> orderList = orderService
+                .updateOrderStatus(orderStatusRequest.getOrderId(),
+                        orderStatusRequest.getStatusId());
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(orderList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
