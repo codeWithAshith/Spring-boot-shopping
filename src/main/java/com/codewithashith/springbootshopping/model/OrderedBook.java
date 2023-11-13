@@ -13,24 +13,32 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderStatus {
+public class OrderedBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
-    private String status;
-
     @JsonIgnore
-    @OneToOne(mappedBy = "orderStatus")
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
+
+    @Column(nullable = false, length = 200)
+    private String title;
+
+    @Column(nullable = false, length = 200)
+    private String description;
+
+    @Column(nullable = false, length = 200)
+    private String author;
+
+    @Column(nullable = false, length = 200)
+    private Double price;
+
+    private Integer count = 1;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    public OrderStatus(String status) {
-        this.status = status;
-    }
+    private LocalDateTime orderTime;
 }

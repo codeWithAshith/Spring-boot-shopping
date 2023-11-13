@@ -24,7 +24,7 @@ public class Cart {
     private Long id;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private AppUser appUser;
 

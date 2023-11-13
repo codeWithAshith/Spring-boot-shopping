@@ -2,6 +2,7 @@ package com.codewithashith.springbootshopping.controller.admin;
 
 import com.codewithashith.springbootshopping.dto.BookDto;
 import com.codewithashith.springbootshopping.model.Book;
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.repository.BookRepository;
 import com.codewithashith.springbootshopping.request.BookRequest;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
@@ -12,11 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/book")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@RolesAllowed(Role.ADMIN)
 public class AdminBookController {
 
     @Autowired

@@ -50,8 +50,8 @@ public class AppUser {
     private List<Order> orderList = new ArrayList<>();
 
     @JsonIgnore
-    @OneToOne(mappedBy = "appUser")
-    private Cart cart;
+    @OneToMany(mappedBy = "appUser")
+    private List<Cart> carts;
 
     @OneToMany(mappedBy = "appUser")
     private List<Address> addressList;

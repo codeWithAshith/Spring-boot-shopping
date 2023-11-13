@@ -1,5 +1,6 @@
 package com.codewithashith.springbootshopping.controller;
 
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.request.LoginRequest;
 import com.codewithashith.springbootshopping.request.RegisterRequest;
 import com.codewithashith.springbootshopping.response.AuthResponse;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/auth")
+//@RequestMapping("/api/auth")
+@RolesAllowed(Role.USER)
 public class AuthController {
 
     @Autowired

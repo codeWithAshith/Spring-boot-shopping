@@ -1,6 +1,7 @@
 package com.codewithashith.springbootshopping.controller.admin;
 
 import com.codewithashith.springbootshopping.model.AppUser;
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.response.UserResponse;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
 import com.codewithashith.springbootshopping.service.UserService;
@@ -10,11 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/user")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@RolesAllowed(Role.ADMIN)
 public class AdminUserController {
 
     @Autowired

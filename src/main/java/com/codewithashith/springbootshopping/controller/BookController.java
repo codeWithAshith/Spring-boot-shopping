@@ -1,6 +1,7 @@
 package com.codewithashith.springbootshopping.controller;
 
 import com.codewithashith.springbootshopping.model.Book;
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
 import com.codewithashith.springbootshopping.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/book")
-@PreAuthorize("hasRole('ROLE_USER')")
+//@PreAuthorize("hasRole('ROLE_USER')")
+@RolesAllowed(Role.USER)
 public class BookController {
 
     @Autowired

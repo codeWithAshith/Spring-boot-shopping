@@ -1,5 +1,6 @@
 package com.codewithashith.springbootshopping.controller.admin;
 
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.request.CategoryRequest;
 import com.codewithashith.springbootshopping.response.CategoryResponse;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
@@ -11,9 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/api/admin/category")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@RolesAllowed(Role.ADMIN)
 public class AdminCategoryController {
 
     @Autowired

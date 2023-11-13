@@ -1,9 +1,10 @@
 package com.codewithashith.springbootshopping.dataloader;
 
+import com.codewithashith.springbootshopping.model.Address;
 import com.codewithashith.springbootshopping.model.AppUser;
+import com.codewithashith.springbootshopping.model.OrderStatus;
 import com.codewithashith.springbootshopping.model.Role;
-import com.codewithashith.springbootshopping.repository.RoleRepository;
-import com.codewithashith.springbootshopping.repository.UserRepository;
+import com.codewithashith.springbootshopping.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -21,10 +22,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private RoleRepository roleRepository;
-
+    @Autowired
+    private OrderStatusRepository orderStatusRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -41,8 +42,16 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 //        Create user
         createUserIfNotFound("user", "user", userRole);
         createUserIfNotFound("admin", "admin", adminRole);
+        createStatus("Pending");
+        createStatus("Confirmed");
+        createStatus("Out for Delivery");
+        createStatus("Delivered");
 
         alreadySetup = true;
+    }
+
+    private void createStatus(String status) {
+        orderStatusRepository.save(new OrderStatus(status));
     }
 
     @Transactional

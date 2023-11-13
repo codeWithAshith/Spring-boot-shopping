@@ -22,19 +22,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
-    private String title;
-
-    @Column(nullable = false, length = 200)
-    private String description;
-
-    @Column(nullable = false, length = 200)
-    private String author;
-
-    @Column(nullable = false, length = 200)
-    private Double price;
-
-    private Integer count = 1;
+    @OneToMany(mappedBy = "order")
+    private List<OrderedBook> orderedBook;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

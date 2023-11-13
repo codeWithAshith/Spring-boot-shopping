@@ -1,5 +1,6 @@
 package com.codewithashith.springbootshopping.controller;
 
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.request.CartRequest;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
 import com.codewithashith.springbootshopping.service.CartService;
@@ -9,9 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/api/cart")
-@PreAuthorize("hasRole('ROLE_USER')")
+//@PreAuthorize("hasRole('ROLE_USER')")
+@RolesAllowed(Role.USER)
 public class CartController {
 
     @Autowired

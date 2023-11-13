@@ -1,6 +1,7 @@
 package com.codewithashith.springbootshopping.controller;
 
 import com.codewithashith.springbootshopping.model.AppUser;
+import com.codewithashith.springbootshopping.model.Role;
 import com.codewithashith.springbootshopping.request.AddressRequest;
 import com.codewithashith.springbootshopping.response.AddressResponse;
 import com.codewithashith.springbootshopping.response.UserResponse;
@@ -13,9 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/api/user")
-@PreAuthorize("hasRole('ROLE_USER')")
+//@PreAuthorize("hasRole('ROLE_USER')")
+@RolesAllowed(Role.USER)
 public class UserController {
 
     @Autowired
