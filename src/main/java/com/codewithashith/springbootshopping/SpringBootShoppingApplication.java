@@ -5,10 +5,7 @@ import com.codewithashith.springbootshopping.request.AddressRequest;
 import com.codewithashith.springbootshopping.request.BookRequest;
 import com.codewithashith.springbootshopping.request.CategoryRequest;
 import com.codewithashith.springbootshopping.request.RegisterRequest;
-import com.codewithashith.springbootshopping.service.AddressService;
-import com.codewithashith.springbootshopping.service.BookService;
-import com.codewithashith.springbootshopping.service.CategoryService;
-import com.codewithashith.springbootshopping.service.UserService;
+import com.codewithashith.springbootshopping.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,12 +19,13 @@ public class SpringBootShoppingApplication implements CommandLineRunner {
 //    http://localhost:8080/swagger-ui/
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
     @Autowired
-    AddressService addressService;
-
+    private AddressService addressService;
     @Autowired
-    BookService bookService;
+    private BookService bookService;
+    @Autowired
+    private CartService cartService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootShoppingApplication.class, args);
@@ -93,7 +91,8 @@ public class SpringBootShoppingApplication implements CommandLineRunner {
         System.out.println(bookService.createBook(bookRequestDelete));
 
         System.out.println(bookService.updateBook(bookRequestUpdate));
-        System.out.println(bookService.deleteById(2));
+//        System.out.println(bookService.deleteById(2));
+
 
     }
 }

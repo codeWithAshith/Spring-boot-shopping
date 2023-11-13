@@ -1,7 +1,8 @@
 package com.codewithashith.springbootshopping.controller;
 
+import com.codewithashith.springbootshopping.request.CartRequest;
 import com.codewithashith.springbootshopping.response.common.APIResponse;
-import io.swagger.models.auth.In;
+import com.codewithashith.springbootshopping.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +17,28 @@ public class CartController {
     @Autowired
     private APIResponse apiResponse;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<APIResponse> getUsersCart(@PathVariable Integer userId) {
+    @Autowired
+    private CartService cartService;
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<APIResponse> getUsersCart(@PathVariable Long userId) {
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(cartService.findUserCart(userId));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<APIResponse> addToCart() {
-
+    public ResponseEntity<APIResponse> addToCart(@RequestBody CartRequest cartRequest) {
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(cartService.addToCart(cartRequest));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<APIResponse> updateCart() {
-
-        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<APIResponse> deleteBookFromCart(@PathVariable Integer id) {
-
+    @DeleteMapping("/{userId}/{bookCart}")
+    public ResponseEntity<APIResponse> deleteBookFromCart(@PathVariable Long userId,
+                                                          @PathVariable Long bookCart) {
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(cartService.deleteBookFromCart(userId, bookCart));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 

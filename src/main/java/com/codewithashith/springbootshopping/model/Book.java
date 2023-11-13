@@ -35,6 +35,9 @@ public class Book {
     @Column(nullable = false, length = 200)
     private Double price;
 
+    @Transient
+    private Integer count;
+
     @Lob
     @Column(name = "photo", columnDefinition="BLOB")
     private byte[] photo;
@@ -45,7 +48,7 @@ public class Book {
     private Category category;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "books")
+    @OneToMany(mappedBy = "book")
     private List<Cart> carts = new ArrayList<>();
 
     @CreationTimestamp
