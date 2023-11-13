@@ -62,6 +62,7 @@ public class OrderService {
             orderedBook.setPrice(cart.getBook().getPrice());
             orderedBook.setCount(cart.getCount());
             orderedBookRepository.save(orderedBook);
+            cartRepository.delete(cart);
         }
 
         return getUserOrders(userId);

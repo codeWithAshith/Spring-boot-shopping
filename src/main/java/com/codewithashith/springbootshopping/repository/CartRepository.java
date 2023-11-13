@@ -15,4 +15,5 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
     @Query("select c from Cart c inner join c.appUser a where a.id=?1")
     Optional<List<Cart>> findUserCart(Long userId);
+
 }
