@@ -18,7 +18,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
-//@RequestMapping("/api/auth")
+@RequestMapping("/api/auth")
 @RolesAllowed(Role.USER)
 public class AuthController {
 
