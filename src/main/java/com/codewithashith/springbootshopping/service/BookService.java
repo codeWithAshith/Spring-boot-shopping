@@ -7,11 +7,15 @@ import com.codewithashith.springbootshopping.model.Category;
 import com.codewithashith.springbootshopping.repository.BookRepository;
 import com.codewithashith.springbootshopping.repository.CategoryRepository;
 import com.codewithashith.springbootshopping.request.BookRequest;
+import com.codewithashith.springbootshopping.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -30,19 +34,24 @@ public class BookService {
     }
 
     @Transactional
-    public List<Book> createBook(BookRequest bookRequest) {
-        Book book = bookDto.mapToBook(bookRequest);
-        Category category = categoryRepository.findById(bookRequest.getCategoryId())
+    public List<Book> createBook(Book book, Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("CategoryId",
-                        "CategoryId", bookRequest.getCategoryId()));
+                        "CategoryId", categoryId));
+        book.setPhoto(ImageUtils.compressImage(book.getPhoto()));
         book.setCategory(category);
         bookRepository.save(book);
         return findAll();
     }
 
     @Transactional
-    public List<Book> updateBook(BookRequest bookRequest) {
+    public List<Book> updateBook(BookRequest bookRequest, MultipartFile file) {
         Book book = bookDto.mapToBook(bookRequest);
+        try {
+            book.setPhoto(ImageUtils.compressImage(file.getBytes()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Category category = categoryRepository.findById(bookRequest.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("CategoryId",
                         "CategoryId", bookRequest.getCategoryId()));
@@ -54,5 +63,10 @@ public class BookService {
     public List<Book> deleteById(Integer id) {
         bookRepository.deleteById(Long.valueOf(id));
         return findAll();
+    }
+
+    public Book getBook(String name) {
+        Optional<Book> bookOptional = bookRepository.findByTitle(name);
+        return bookOptional.get();
     }
 }

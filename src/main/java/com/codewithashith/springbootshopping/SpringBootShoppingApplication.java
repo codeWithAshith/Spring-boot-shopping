@@ -87,10 +87,10 @@ public class SpringBootShoppingApplication implements CommandLineRunner {
         bookRequestDelete.setCategoryId(1L);
         bookRequestDelete.setPrice(200D);
 
-        System.out.println(bookService.createBook(bookRequest));
-        System.out.println(bookService.createBook(bookRequestDelete));
-
-        System.out.println(bookService.updateBook(bookRequestUpdate));
+//        System.out.println(bookService.createBook(bookRequest));
+//        System.out.println(bookService.createBook(bookRequestDelete));
+//
+//        System.out.println(bookService.updateBook(bookRequestUpdate));
 //        System.out.println(bookService.deleteById(2));
 
 
